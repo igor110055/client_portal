@@ -1,8 +1,6 @@
 import {
     ApolloClient,
     InMemoryCache,
-    ApolloProvider,
-    useQuery,
     gql
 } from "@apollo/client";
 
@@ -11,16 +9,14 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
-export const graphqlTest = () => {
-    client
-        .query({
+export const graphqlCandlestick = async (params: any) => {
+    const {from, exchange, coin} = params;
+    const result = await client.query({
             query: gql`
                   query 
                   {
-                    exchangeDataCandlestick (from: 1631973900, exchange: Binance, coin:"BTCUSDT")
+                    exchangeDataCandlestick (from: ${from}, exchange: ${exchange}, coin:"${coin}")
                     {   
-                        coin,
-                        exchange,
                         open,
                         close,
                         timestamp,
@@ -29,6 +25,5 @@ export const graphqlTest = () => {
                     }
                   }`
         })
-        .then((result) => console.log(result.data.exchangeDataCandlestick.map((d: any) => {return {...d, "x": d.timestamp}})))
 }
 

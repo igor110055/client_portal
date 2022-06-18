@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { QueryBuilder, Field, RuleGroupType } from 'react-querybuilder';
+import {useState} from 'react';
+import {Field, QueryBuilder, RuleGroupType} from 'react-querybuilder';
 import 'react-querybuilder/dist/query-builder.scss';
-import {Button, Container, Grid, Stack, Drawer, JsonInput, TextInput, PasswordInput} from "@mantine/core";
-import {graphqlTest} from "../../lib/graphqlConsumer";
+import {Button, Container, Drawer, Grid, Stack} from "@mantine/core";
+import {graphqlCandlestick} from "../../lib/graphqlConsumer";
 
 const fields: Field[] = [
-    { name: 'token', label: 'Token name' },
-    { name: 'price', label: 'Token price' },
-    { name: 'incr', label: 'Increased' },
-    { name: 'decr', label: 'Decreased' },
+    {name: 'token', label: 'Token name'},
+    {name: 'price', label: 'Token price'},
+    {name: 'incr', label: 'Increased'},
+    {name: 'decr', label: 'Decreased'},
 
 ];
 
@@ -16,8 +16,8 @@ export const QueryBuilderWrapper = () => {
     const [query, setQuery] = useState<RuleGroupType>({
         combinator: 'and',
         rules: [
-            { field: 'token', operator: '=', value: 'ETH' },
-            { field: 'price', operator: '=', value: '1021.06$' },
+            {field: 'token', operator: '=', value: 'ETH'},
+            {field: 'price', operator: '=', value: '1021.06$'},
         ],
     });
     const [opened, setOpened] = useState(false);
@@ -29,7 +29,7 @@ export const QueryBuilderWrapper = () => {
         >
             <Grid columns={100}>
                 <Grid.Col span={70}>
-                    <QueryBuilder fields={fields} query={query} onQueryChange={q => setQuery(q)} />
+                    <QueryBuilder fields={fields} query={query} onQueryChange={q => setQuery(q)}/>
                 </Grid.Col>
                 <Grid.Col span={30}>
                     <Stack>
@@ -52,20 +52,13 @@ export const QueryBuilderWrapper = () => {
                             onClick={() => setQuery({
                                 combinator: 'and',
                                 rules: [
-                                    { field: 'token', operator: '=', value: 'ETH' },
-                                    { field: 'price', operator: '=', value: '1203.34$' },
+                                    {field: 'token', operator: '=', value: 'ETH'},
+                                    {field: 'price', operator: '=', value: '1203.34$'},
                                 ],
                             })}
                             fullWidth
                         >
-                           Reset queries
-                        </Button>
-                        <Button
-                            color={'violet'}
-                            onClick={() => graphqlTest()}
-                            fullWidth
-                        >
-                            GraphQL Test
+                            Reset queries
                         </Button>
                     </Stack>
                 </Grid.Col>

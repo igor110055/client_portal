@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter as Router, Route, Routes, useNavigate} from "react-router-dom";
-import {AppShell, Text, Header, Navbar, Stack, Button} from '@mantine/core';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {AppShell, Text, Header, Navbar} from '@mantine/core';
 import {QueryBuilderWrapper} from "./components/querybuilder/QueryBuilderWrapper";
 import {UserNavBar} from "./components/navbar/UserNavBar";
-import {VictoryCandlestickDemo} from "./components/visualization/Candlestick";
+import {Explore} from "./components/visualization/Explore";
 
 function App() {
 
@@ -40,7 +40,7 @@ function App() {
         >
           <Routes>
               <Route path="/" element={<QueryBuilderWrapper/>}/>
-              <Route path='charts' element={<VictoryCandlestickDemo/>}/>
+              <Route path='charts' element={<Explore/>}/>
           </Routes>
         </AppShell>
       </Router>
