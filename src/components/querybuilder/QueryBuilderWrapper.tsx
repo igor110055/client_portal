@@ -27,7 +27,9 @@ export const QueryBuilderWrapper = () => {
             fluid
             style={{height: 500}}
         >
-            <Grid columns={100}>
+            <Grid
+                mt={100}
+                columns={100}>
                 <Grid.Col span={70}>
                     <QueryBuilder fields={fields} query={query} onQueryChange={q => setQuery(q)}/>
                 </Grid.Col>
@@ -45,7 +47,7 @@ export const QueryBuilderWrapper = () => {
                             onClick={() => setOpened(true)}
                             color={'orange'}
                         >
-                            Configure reaction
+                            Configure action
                         </Button>
                         <Button
                             color={'red'}
