@@ -36,11 +36,6 @@ export const Explore = () => {
     const [retrievedRedditData, setRetrievedRedditData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [plotMode, setPlotMode] = useState('twitter');
-    const [candleData, setCandleData] = useState();
-
-    useEffect(() => {
-        console.log(candleData);
-    },[candleData])
 
     useEffect(() => {
         if (redditMetric){
@@ -66,9 +61,11 @@ export const Explore = () => {
                 onTabChange={setActiveTab}>
                 <Tabs.Tab label={'Social metrics'}>
                     <Grid
-                        style={{height: 500}}
+                        style={{height: 400}}
                         columns={100}>
-                        <Grid.Col span={50}>
+                        <Grid.Col
+                            mt={30}
+                            span={50}>
                             <Accordion>
                                 <Accordion.Item
                                     icon={<TwitterLogoIcon color={"#1DA1F2"}/>}
@@ -189,31 +186,21 @@ export const Explore = () => {
                             />
                         </Grid.Col>
                         <Grid.Col span={50}>
-                            <CandleStick data={candleData}/>
+                            {/*<CandleStick data={candleData}/>*/}
                         </Grid.Col>
                     </Grid>
                 </Tabs.Tab>
             </Tabs>
-            <Space mt={300}/>
             <Divider my="sm"/>
             <SimpleGrid
                 spacing="xl"
                 cols={3}>
                 <Button
                     onClick={async () => {
-                     const data = await graphqlCandlestick();
-                     console.log(data);
-                     setCandleData(data);
-                }}
-                >
-                    Get candlestick data
-                </Button>
-                <Button
-                    onClick={async () => {
                         switch (plotMode) {
                             case 'twitter':
                                 setLoading(true)
-                                const twitterResponse = await graphqlTweetService({lastMs: parseInt(socialDateRangeFixed)});
+                                const twitterResponse = await graphqlTweetService();
                                 setLoading(false);
                                 setRetrievedTweetData(twitterResponse.data['tweetData']);
                                 break;

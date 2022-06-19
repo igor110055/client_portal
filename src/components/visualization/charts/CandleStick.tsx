@@ -1,11 +1,29 @@
 import {VictoryChart, VictoryTheme, VictoryAxis, VictoryCandlestick} from 'victory';
 export const CandleStick = (props: any) => {
+    // ✅ Get Max date
+    const maxDate = new Date(
+        Math.max(
+            ...props.data.map((element:any) => {
+                return new Date(element.timestamp * 1000);
+            })
+        )
+    );
+
+
+// ✅ Get Min date
+    const minDate = new Date(
+        Math.min(
+            ...props.data.map((element: any) => {
+                return new Date(element.timestamp * 1000);
+            }),
+        ),
+    );
 
     return (
         <VictoryChart
             theme={VictoryTheme.material}
             domainPadding={{ x: 25 }}
-            scale={{ x: "time" }}
+            scale={{x:'time'}}
         >
             <VictoryCandlestick
                 candleRatio={1}

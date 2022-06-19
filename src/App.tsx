@@ -11,6 +11,7 @@ import {
     ActionIcon,
     useMantineColorScheme
 } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import {QueryBuilderWrapper} from "./components/querybuilder/QueryBuilderWrapper";
 import {UserNavBar} from "./components/navbar/UserNavBar";
 import {Explore} from "./components/visualization/Explore";
@@ -44,6 +45,7 @@ function App() {
                     ],
                 }, }}
         >
+            <NotificationsProvider>
         <div className="App">
             <Router>
                 <AppShell
@@ -94,6 +96,7 @@ function App() {
                 </AppShell>
             </Router>
         </div>
+            </NotificationsProvider>
         </MantineProvider>
         </ColorSchemeProvider>
     );

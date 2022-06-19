@@ -5,7 +5,6 @@ export const UserDashboard = () => {
         <Container
             mt={10}
             fluid>
-
         </Container>
     )
 }
