@@ -1,30 +1,44 @@
 import {useNavigate} from "react-router-dom";
-import {Button, Stack} from "@mantine/core";
+import {ActionIcon, Button, Stack, useMantineColorScheme} from "@mantine/core";
 import React from "react";
+import {Crosshair1Icon, GlobeIcon, HomeIcon, MoonIcon, SunIcon} from "@radix-ui/react-icons";
 
 export const UserNavBar = () => {
     const navigate = useNavigate();
+
+
     return (
         <Stack
-            justify="center"
-            style={{height: '100%'}}
-        >
+            mt={80}
+            >
             <Button
-                variant="outline"
+                leftIcon={<HomeIcon/>}
+                variant="subtle"
                 onClick={() => {
-                    navigate('/')
+                    navigate('/dashboard')
                 }
-                }>
-                Build a query
+                }
+            >
+                Dashboard
             </Button>
             <Button
-                variant="outline"
+                leftIcon={<GlobeIcon/>}
+                variant="subtle"
                 onClick={() => {
                     navigate('/charts')
                 }
                 }
             >
-                Explore trends
+                Explore data
+            </Button>
+            <Button
+                variant="subtle"
+                leftIcon={<Crosshair1Icon/>}
+                onClick={() => {
+                    navigate('/')
+                }
+                }>
+                Trigger builder
             </Button>
         </Stack>
     )

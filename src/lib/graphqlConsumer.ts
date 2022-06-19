@@ -1,8 +1,4 @@
-import {
-    ApolloClient,
-    InMemoryCache,
-    gql
-} from "@apollo/client";
+import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
 
 const client = new ApolloClient({
     uri: 'http://10.2.113.62:8080/graphql',
@@ -12,7 +8,7 @@ const client = new ApolloClient({
 export const graphqlCandlestick = async (params: any) => {
     const {from, exchange, coin} = params;
     const result = await client.query({
-            query: gql`
+        query: gql`
                   query 
                   {
                     exchangeDataCandlestick (from: ${from}, exchange: ${exchange}, coin:"${coin}")
@@ -24,6 +20,34 @@ export const graphqlCandlestick = async (params: any) => {
                         low
                     }
                   }`
-        })
+    })
 }
 
+export const graphqlTweetService = async (params: any) => {
+    const {lastMs} = params;
+    const result = await client.query({
+        query: gql`query {
+                       tweetData (lastMs: ${lastMs})
+                      {
+                       sentiment,
+                       text,
+                       coin
+                      }
+                     }`
+    });
+    return result;
+}
+
+export const graphqlRedditService = async (params: any) => {
+    const {coin} = params;
+    const result = await client.query({
+        query: gql`query {
+                    redditData(textLike: "${coin}"){
+                        text,
+                        sentiment,
+                        timestamp
+                    }
+                    }`
+    });
+    return result;
+}

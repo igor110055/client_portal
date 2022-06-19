@@ -2,7 +2,9 @@ import {useState} from 'react';
 import {Field, QueryBuilder, RuleGroupType} from 'react-querybuilder';
 import 'react-querybuilder/dist/query-builder.scss';
 import {Button, Container, Drawer, Grid, Stack} from "@mantine/core";
-import {graphqlCandlestick} from "../../lib/graphqlConsumer";
+import { antdControlElements } from '@react-querybuilder/antd';
+import '../../index.scss';
+import {ArchiveIcon, Cross1Icon, GearIcon} from "@radix-ui/react-icons";
 
 const fields: Field[] = [
     {name: 'token', label: 'Token name'},
@@ -28,29 +30,40 @@ export const QueryBuilderWrapper = () => {
             style={{height: 500}}
         >
             <Grid
+                style={{height: '100%'}}
                 mt={100}
                 columns={100}>
-                <Grid.Col span={70}>
-                    <QueryBuilder fields={fields} query={query} onQueryChange={q => setQuery(q)}/>
+                <Grid.Col
+                    className={'queryBg'}
+                    span={100}>
+                    <QueryBuilder
+                        enableDragAndDrop
+                        controlElements={antdControlElements}
+                        fields={fields}
+                        query={query}
+                        onQueryChange={q => setQuery(q)}/>
                 </Grid.Col>
-                <Grid.Col span={30}>
-                    <Stack>
+                <Grid.Col offset={80} span={20}>
+                    <Stack spacing={'xs'}>
                         <Button
+                            leftIcon={<ArchiveIcon/>}
+                            color={'green'}
                             onClick={() => console.log(query)}
                             fullWidth
-                            color={'green'}
                         >
                             Save query
                         </Button>
                         <Button
+                            leftIcon={<GearIcon/>}
                             fullWidth
-                            onClick={() => setOpened(true)}
                             color={'orange'}
+                            onClick={() => setOpened(true)}
                         >
                             Configure action
                         </Button>
                         <Button
                             color={'red'}
+                            leftIcon={<Cross1Icon/>}
                             onClick={() => setQuery({
                                 combinator: 'and',
                                 rules: [

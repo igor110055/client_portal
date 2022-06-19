@@ -1,0 +1,35 @@
+@import 'antd/dist/antd.compact.css';
+@import 'react-querybuilder/dist/query-builder.scss';
+
+body {
+  margin: 0.5rem !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.queryBuilder {
+.ant-input {
+  width: auto;
+}
+
+}
+
+.queryBg {
+  border: 1px solid #242529;
+  height: 90%;
+  border-radius: 10px;
+  background: #53525F;
+}
+
+.saveButton {
+  background: #ACF39D;
+}
+
+.resetButton {
+  background: #53353A;
+}
+.configButton {
+  background: #F2C57C;
+}
