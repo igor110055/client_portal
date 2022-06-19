@@ -17,7 +17,8 @@ import {
 import {useEffect, useState} from "react";
 import {PersonIcon, TwitterLogoIcon, VideoIcon} from "@radix-ui/react-icons";
 import {LineGraphDemo} from "./charts/LineGraph";
-import {graphqlRedditService, graphqlTweetService} from "../../lib/graphqlConsumer";
+import {graphqlCandlestick, graphqlRedditService, graphqlTweetService} from "../../lib/graphqlConsumer";
+import {CandleStick} from "./charts/CandleStick";
 
 
 export const Explore = () => {
@@ -35,6 +36,11 @@ export const Explore = () => {
     const [retrievedRedditData, setRetrievedRedditData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [plotMode, setPlotMode] = useState('twitter');
+    const [candleData, setCandleData] = useState();
+
+    useEffect(() => {
+        console.log(candleData);
+    },[candleData])
 
     useEffect(() => {
         if (redditMetric){
@@ -182,6 +188,9 @@ export const Explore = () => {
                                 ]}
                             />
                         </Grid.Col>
+                        <Grid.Col span={50}>
+                            <CandleStick data={candleData}/>
+                        </Grid.Col>
                     </Grid>
                 </Tabs.Tab>
             </Tabs>
@@ -190,6 +199,15 @@ export const Explore = () => {
             <SimpleGrid
                 spacing="xl"
                 cols={3}>
+                <Button
+                    onClick={async () => {
+                     const data = await graphqlCandlestick();
+                     console.log(data);
+                     setCandleData(data);
+                }}
+                >
+                    Get candlestick data
+                </Button>
                 <Button
                     onClick={async () => {
                         switch (plotMode) {

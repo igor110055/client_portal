@@ -5,13 +5,12 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
-export const graphqlCandlestick = async (params: any) => {
-    const {from, exchange, coin} = params;
+export const graphqlCandlestick = async () => {
     const result = await client.query({
         query: gql`
                   query 
                   {
-                    exchangeDataCandlestick (from: ${from}, exchange: ${exchange}, coin:"${coin}")
+                    exchangeDataCandlestick (from: 1605973900, exchange: Binance, coin:"BTCUSDT")
                     {   
                         open,
                         close,
@@ -20,6 +19,9 @@ export const graphqlCandlestick = async (params: any) => {
                         low
                     }
                   }`
+    })
+    return result.data.exchangeDataCandlestick.map((entry: any) => {
+        return {...entry, x: new Date(entry.timestamp)}
     })
 }
 
